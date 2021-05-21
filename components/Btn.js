@@ -6,7 +6,7 @@ export const Btn = props => {
 
     return (
         <>
-        <Link href={'/'}>
+        <Link>
         <div className={styles.btn}>
             <button className="w-50 max-w-xs space-x-4 font-bold hover:bg-gray-200 hover:text-black p-3 shadow rounded-lg">
                 {props.text}
