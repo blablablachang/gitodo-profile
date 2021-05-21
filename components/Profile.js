@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from "../styles/Home.module.css";
 import { Btn } from './Btn';
 
 export default class Profile extends React.Component{
@@ -10,15 +9,15 @@ export default class Profile extends React.Component{
   render() {
     return(
       <>
-        <div className="border-r-4 w-60 mt-40 ml-40 mr-40 p-5 row fixed-left">
-          <div className={styles.btnSet}>
-            <Btn text="Account" />
-            <Btn text="Backup & Recover" target="nav_bak" />
-            <Btn text="Theme" target="nav_theme" />
-            <Btn text="Feedback" target = "nav_feedback" />
-            <Btn text="About" target="nav_about" />
-            <Btn text="Log Out" />
-          </div>
+        <div className="sm:pt-40 pt-32 sm:ml-24 ml-5 sm:w-44 w-auto mr-5">
+          <nav className='container flex-col flex bg-white shadow rounded-t-lg rounded-b-lg'>
+            <Btn text="Account" multiclass='rounded-t-lg border-b-2'/>
+            <Btn text="Backup & Recover" target="nav_bak" multiclass='border-b-2'/>
+            <Btn text="Theme" target="nav_theme" multiclass='border-b-2' />
+            <Btn text="Feedback" target = "nav_feedback" multiclass='border-b-2'/>
+            <Btn text="About" target="nav_about" multiclass='border-b-2'/>
+            <Btn text="Log Out" multiclass='rounded-b-lg'/>
+          </nav>
         </div>
       </>
     );

@@ -14,7 +14,7 @@ export default function Home() {
 
       <Header></Header>
 
-      <main className={styles.main}>
+      <main className={styles.main + ' bg-gray-100'}>
         <Profile></Profile>
       </main>
     </div>

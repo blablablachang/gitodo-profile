@@ -102,11 +102,7 @@
 }
 
 .btn{
-  width:13rem;
   text-align: left;
-  font-weight: bold;
-  padding: 0.5rem 2rem;
-  display: inline;
 }
 
 .logOut {
@@ -115,8 +111,7 @@
 }
 
 .btnSet{  
-  margin: 0.5rem 0 0.5rem 0 ;
-  padding: 0 0.5rem 0;
+  padding: 0;
 }
 
 @media (max-width: 600px) {
