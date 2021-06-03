@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import Header from '../components/header';
-import ProfileHome from '../components/ProfilePage/ProfileHome';
+import Notification from '../components/ProfilePage/Notification';
 import Footer from '../components/footer';
 
 export default function Home() {
@@ -17,8 +17,8 @@ export default function Home() {
 
       <Header></Header>
 
-      <main className={styles.main + ' bg-gray-100'} >
-         <ProfileHome></ProfileHome>
+      <main className={styles.main + ' bg-gray-100'}>
+        <Notification></Notification>
       </main>
 
       <Footer className={styles.footer + ' bg-gray-100'}></Footer>

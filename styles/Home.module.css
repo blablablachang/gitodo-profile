@@ -99,20 +99,7 @@
 .logo {
   height: 1em;
   margin-left: 0.5rem;
-}
-
-.btn{
-  text-align: left;
-}
-
-.logOut {
-  width:30rem;
-  margin: 2rem 0 2rem 3rem;
-}
-
-.btnSet{  
-  padding: 0;
-}
+} 
 
 @media (max-width: 600px) {
   .grid {
