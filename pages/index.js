@@ -17,8 +17,10 @@ export default function Home() {
 
       <Header></Header>
 
-      <main className={styles.main + ' bg-gray-100'} >
-         <ProfileHome></ProfileHome>
+      <main className={styles.main + ' bg-gray-100 grid grid-cols-7'} >
+        <div className="col-start-2 col-span-1">
+          <ProfileHome></ProfileHome>
+        </div>
       </main>
 
       <Footer className={styles.footer + ' bg-gray-100'}></Footer>
