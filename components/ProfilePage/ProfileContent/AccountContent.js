@@ -1,12 +1,18 @@
 import React from 'react';
 import { BiEdit } from 'react-icons/bi';
 import Link from 'next/link';
+import {getUser} from '../../../api/user';
 
+let qs = require('qs');
 export default class AccountContent extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      account: '',
+      email: '',
+      name: '',
+      password: '',
       pwdShow: false,
       admShow: false,
       emailShow: false,
@@ -36,7 +42,12 @@ export default class AccountContent extends React.Component {
     let userName = "hey-yo";
     let userEmail = "xxx@gmail.com";
     let phoneNumber = "+886 912-345-678";
-
+    let data = qs.stringify({
+      'account': this.state.account,
+      'email': this.state.email,
+      'name': this.state.name,
+      'password': this.state.password
+    })
 
     return (
       <>
@@ -47,9 +58,9 @@ export default class AccountContent extends React.Component {
         <div className='container shadow rounded-lg p-4 my-3 flex-col flex items-center cursor-default bg-white max-w-xl w-auto'>
           <div className="container flex-row flex items-center">
             <div className={`ml-5 h-4 w-0.5 bg-${color}-500 ring-2 ring-${color}-500`}></div>
-            <span className='ml-5 font-semibold overflow-hidden'>Username:  {userName}</span>
+            <span className='ml-5 font-semibold overflow-hidden'>Username:  {this.state.name}</span>
             <div className='flex-grow' />
-            <button className='text-center rounded-lg border-3 border-black-700 bg-gray-300 text-gray-600 p-1 w-20 font-semibold hover:bg-gray-600 hover:text-white'
+            <button className='text-center rounded-lg border-3 focus:outline-none outline-none border-black-700 bg-gray-300 text-gray-600 p-1 w-20 font-semibold hover:bg-gray-600 hover:text-white'
             onClick={this.handleAdmExpand}><BiEdit className="inline pr-1" />Edit</button>
           </div>
         { this.state.admShow &&
@@ -58,7 +69,7 @@ export default class AccountContent extends React.Component {
               <div className='container ring-2 ring-gray-200 rounded-lg p-3 px-4 my-2 flex-row flex items-center cursor-default bg-white'>
                 <div className={` ml-5 h-4 w-0.5 bg-${color}-500 ring-2 ring-${color}-500`}></div>
                 <label className="ml-5 font-medium overflow-hidden mr-2 w-60" for="curpwd">New UserName</label>
-                <input className="border-2 rounded-md border-gray-300 ml-3 pl-2" placeholder={userName} id="curpwd" type="text" name="curPwd"></input>
+                <input className="border-2 rounded-md border-gray-300 ml-3 pl-2" placeholder={this.state.name} id="curpwd" type="text" name="curPwd"></input>
               </div>
             }
             {
@@ -81,7 +92,7 @@ export default class AccountContent extends React.Component {
           
             <div className="grid row-span-4">
             <div className=' flex sm:flex-row flex-col p-3'>
-            <textarea type='textarea' className='text-left rounded-md mx-1 sm:w-96 w-64 bg-white border-gray-200 border-2 pr-2 pl-2 pb-1 pt-1 outline-none focus:outline-none hover:border-red-200 focus:border-red-500 cursor-auto focus:placeholder-transparent' 
+            <textarea type='textarea' className='container text-left rounded-md mx-1 sm:w-96 w-auto bg-white border-gray-200 border-2 pr-2 pl-2 pb-1 pt-1 outline-none focus:outline-none hover:border-red-200 focus:border-red-500 cursor-auto focus:placeholder-transparent' 
               placeholder='Write something about yourself...' 
             ></textarea>
             </div>
@@ -93,9 +104,9 @@ export default class AccountContent extends React.Component {
         <div className='container shadow rounded-lg p-4 my-3 flex-col flex items-center cursor-default bg-white max-w-xl w-auto'>
           <div className="container flex-row flex items-center">
             <div className={`ml-5 h-4 w-0.5 bg-${color}-500 ring-2 ring-${color}-500`}></div>
-            <span className='ml-5 font-semibold overflow-hidden'>Email:  {userEmail}</span>
+            <span className='ml-5 font-semibold overflow-hidden'>Email:  {this.state.email}</span>
             <div className='flex-grow' />
-            <button type='submit' className='text-center rounded-lg border-3 border-black-700 bg-gray-300 text-gray-600 pr-2 pl-2 pb-1 pt-1 ml-5 font-semibold hover:bg-gray-600 hover:text-white'
+            <button type='submit' className='text-center rounded-lg focus:outline-none outline-none border-3 border-black-700 bg-gray-300 text-gray-600 pr-2 pl-2 pb-1 pt-1 ml-5 font-semibold hover:bg-gray-600 hover:text-white'
             onClick={this.handleEmailExpand}><BiEdit className="inline pr-1" />Edit</button>
           </div>
           { this.state.emailShow &&
@@ -104,7 +115,7 @@ export default class AccountContent extends React.Component {
               <div className='container ring-2 ring-gray-200 rounded-lg p-3 px-4 my-2 flex-row flex items-center cursor-default bg-white'>
                 <div className={` ml-5 h-4 w-0.5 bg-${color}-500 ring-2 ring-${color}-500`}></div>
                 <label className="ml-5 font-medium overflow-hidden mr-2 w-60" for="curpwd">New Email</label>
-                <input className="border-2 rounded-md border-gray-300 ml-3 pl-2" placeholder={userEmail} id="curpwd" type="text" name="curPwd"></input>
+                <input className="border-2 rounded-md border-gray-300 ml-3 pl-2" placeholder={this.state.email} id="curpwd" type="text" name="curPwd"></input>
               </div>
             }
             {
@@ -124,7 +135,7 @@ export default class AccountContent extends React.Component {
             <div className={`ml-5 h-4 w-0.5 bg-${color}-500 ring-2 ring-${color}-500`}></div>
             <span className='ml-5 font-semibold overflow-hidden'>Connected Phone:  {phoneNumber}</span>
             <div className='flex-grow' />
-            <button className='text-center rounded-lg border-3 border-black-700 bg-gray-300 text-gray-600 pr-2 pl-2 pb-1 pt-1 ml-5 font-semibold hover:bg-gray-600 hover:text-white '
+            <button className='text-center rounded-lg border-3 focus:outline-none outline-none border-black-700 bg-gray-300 text-gray-600 pr-2 pl-2 pb-1 pt-1 ml-5 font-semibold hover:bg-gray-600 hover:text-white '
             onClick={this.handlePhoneExpand}><BiEdit className="inline pr-1" />Change</button>
           </div>
           { this.state.phoneShow &&
@@ -154,7 +165,7 @@ export default class AccountContent extends React.Component {
             <div className={` ml-5 h-4 w-0.5 bg-${color}-500 ring-2 ring-${color}-500`}></div>
             <span className='ml-5 font-semibold overflow-hidden'>Password</span>
             <div className='flex-grow' />
-            <button  className='text-center rounded-lg border-3 border-black-700 bg-gray-300 text-gray-600 p-2 font-semibold hover:bg-gray-600 hover:text-white' onClick={this.handlePwdExpand}>
+            <button  className='text-center rounded-lg border-3 focus:outline-none outline-none border-black-700 bg-gray-300 text-gray-600 p-2 font-semibold hover:bg-gray-600 hover:text-white' onClick={this.handlePwdExpand}>
             {this.state.pwdShow ? "Cancel" : "Change Password"}</button>
           </div>
            { this.state.pwdShow &&

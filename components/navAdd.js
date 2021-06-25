@@ -40,7 +40,7 @@ export default class NavAdd extends React.Component{
           <button className='p-1 border-b-2 border-transparent hover:border-red-500 transition-all focus:outline-none outline-none' onClick={this.openMenu}>Add</button>
 
           {this.state.dropdown ? (
-            <ul className='fixed top-15 right-10 bg-white shadow-lg py-3 my-6 mx-4 rounded-xl text-black ring-2 ring-red-500'>
+            <ul className='fixed top-15 right-5 bg-white shadow-lg py-3 my-6 mx-4 rounded-xl text-black ring-2 ring-red-500'>
               <li className='px-4 py-2 hover:bg-red-500 hover:text-white'><a href='/'>New Branch</a></li>
               <li className='px-4 py-2 hover:bg-red-500 hover:text-white'><a href='/'>Import Branch</a></li>
               <li className='px-4 py-2 hover:bg-red-500 hover:text-white'><a href='/'>New Task</a></li>

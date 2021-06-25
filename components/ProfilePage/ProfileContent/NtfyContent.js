@@ -54,7 +54,7 @@ export default class AccountContent extends React.Component {
         <button type='submit' className='ring-2 ring-green-600 bg-green-200 hover:bg-green-600 text-green-800 hover:text-white rounded-lg shadow-md p-2 focus:outline-none my-3' onClick={this.handleSubmit}>
           <span>Save</span>
         </button>
-        <Link href='/profile'>
+        <Link href='/profile/profile'>
           <button className='ring-2 ring-red-600 text-red-800 bg-red-200 hover:bg-red-600 hover:text-white rounded-lg shadow-md py-2 px-2.5 focus:outline-none my-3 ml-5'
           >
             <a>

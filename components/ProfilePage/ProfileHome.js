@@ -10,19 +10,19 @@ export default class Profile extends React.Component{
     
     return(
       <>
-        <div className="col-start-2 col-span-1 sm:pt-40 pt-32 ml-5 sm:w-44 w-auto mr-5">
+        <div className="pt-40 pt-32 ml-5 w-44 w-auto mr-5 hidden sm:flex">
           <nav className='container flex-col flex bg-white shadow rounded-t-lg rounded-b-lg'>
-            <Link href='/account'>
-              <a className="rounded-t-lg border-b-2 border-gray-100 bg-white font-semibold hover:bg-gray-200 hover:text-black p-3 text-left">
+            <Link href='/profile/account'>
+              <a className="rounded-t-lg border-b-2 border-gray-100 bg-white font-semibold hover:bg-gray-200 hover:text-black p-3 text-left ">
                   Profile & Account
               </a>
             </Link>
-            <Link href='/theme'>
+            <Link href='/profile/theme'>
               <a className="border-b-2 border-gray-100 bg-white font-semibold hover:bg-gray-200 hover:text-black p-3 text-left">
                     Theme
               </a>
             </Link>
-            <Link href='/notification'>
+            <Link href='/profile/notification'>
               <a className="border-b-2 border-gray-100 bg-white font-semibold hover:bg-gray-200 hover:text-black p-3 text-left">
                   Notification
               </a>
@@ -35,7 +35,8 @@ export default class Profile extends React.Component{
           </nav>
         </div>
           
-      
+        <div>
+      `</div>
       </>
     );
   }

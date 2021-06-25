@@ -1,20 +1,57 @@
-import Link from 'next/link';
+import React from 'react';
 
-export default function Avatar() {
-  return (
-    <>
-      <Link href='../profile.js'>
-        <a className='inline-flex items-end mr-2'>
+export default class Avatar extends React.Component{
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      dropdown: false
+    };
+    this.openMenu = this.openMenu.bind(this);
+    this.closeMenu = this.closeMenu.bind(this);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('click', this.closeMenu)
+  }
+
+  openMenu(syntheticEvent){
+    syntheticEvent.stopPropagation()
+    this.setState({dropdown: !this.state.dropdown}, () => {
+      if(this.state.dropdown) {
+        window.addEventListener('click', this.closeMenu)
+      }
+    });
+  }
+
+  closeMenu() {
+    this.setState({dropdown: false}, () => {
+      window.removeEventListener('click', this.closeMenu)
+    });
+  }
+
+  
+
+  render() {
+    /* TODO: replace url and svg */
+    return(
+      <>
+        <div>
+        <button className='inline-flex items-end mr-2 'onClick={this.openMenu}>
           {/* TODO: modify code to get avatar from database */}
-          <svg
-            viewBox='0 0 24 24'
-            xmlns='http://www.w3.org/2000/svg'
-            className='fill-current text-red-500 h-6 w-6 mr-2'
-          >
-            <path d='M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.337 6.182 14.976 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.538 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.337 13.382 8.976 12 6.001 12z' />
-          </svg>
-        </a>
-      </Link>
-    </>
-  )
+<span className='pt-0.5 material-icons'>{this.state.dropdown ? "account_circle" : "person"}</span>
+        </button>
+
+          {this.state.dropdown ? (
+            <ul className='fixed top-15 right-0 bg-white shadow-lg py-3 my-6 mx-4 rounded-xl text-black ring-2 ring-red-500'>
+              <li className='px-4 py-2 hover:bg-red-500 hover:text-white'><a href='/'>Settings</a></li>
+              <li className='px-4 py-2 hover:bg-red-500 hover:text-white'><a href='/'>Log Out</a></li>
+            </ul>
+          ) : (null)}
+        </div>
+      </>
+    );
+  }
+  
 }
+
