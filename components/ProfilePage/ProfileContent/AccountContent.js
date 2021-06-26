@@ -122,7 +122,7 @@ class AccountContent extends React.Component {
               <div className='my-2.5 container ring-2 ring-gray-200 rounded-lg p-3 px-4 flex-row flex items-center cursor-default bg-white'>
                 <label className="ml-6 font-medium overflow-hidden mr-2 w-60" for="curpwd">Current Password</label>
                 <input type="password" name="curPwd" className='text-center sm:mr-10 mx-3 sm:w-60 w-32 bg-white border-gray-200 border-b-2 p-1 outline-none focus:outline-none hover:border-red-200 focus:border-red-500 cursor-auto focus:placeholder-transparent' 
-                placeholder='Current Password' onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
+                placeholder='Current Password' onChange={this.pwdConfirm} required value={this.state.input.curPwd} onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
                 ></input>              
               </div>
             }
@@ -146,7 +146,7 @@ class AccountContent extends React.Component {
             
               <div className="mr-auto ml-3">
               <div className="text-red-500 font-bold">{this.state.msg.newPwd1}</div>
-              <div>{this.state.msg.newPwd2}</div>
+              <div className="text-red-500 font-bold">{this.state.msg.curPwd}</div>
               <span className='cursor-pointer text-blue-700 hover:underline sm:text-base text-xs block'>Forgot Password?</span>
               <button className='ring-2 ring-green-600 bg-green-200 hover:bg-green-600 text-green-800 hover:text-white rounded-lg shadow-md pl-2 pr-2 pt-1 pb-1 focus:outline-none my-3' 
               onClick={this.handlePwdSubmit}>
@@ -178,6 +178,7 @@ class AccountContent extends React.Component {
   // Password Part
   handlePwdExpand () {
     this.setState({ pwdShow: !this.state.pwdShow, });
+    this.setState({input: {}, msg: {}})
   }
   pwdConfirm(e){
     var inputPwd = this.state.input;
@@ -209,13 +210,12 @@ class AccountContent extends React.Component {
       input["newPwd2"] = "";
     }    
     var msg={};
-    if("" === userId.password)
-      this.setState({pwdValid: true});
-    else{
+    if(this.state.input["curPwd"] !== this.state.password){
       this.setState({pwdValid: false});
       msg["curPwd"] = "!Current Password Are Wrong!";
       this.setState({msg: msg});
     }
+    else  this.setState({pwdValid: true});
 
     if(this.state.newPwdValid && this.state.pwdValid ){
       console.log('Pwd ok')
