@@ -11,7 +11,7 @@ export default class Avatar extends React.Component{
     this.closeMenu = this.closeMenu.bind(this);
   }
 
-  componentWillUnmount() {  
+  componentWillUnmount() {
     window.removeEventListener('click', this.closeMenu)
   }
 
@@ -37,14 +37,14 @@ export default class Avatar extends React.Component{
     return(
       <>
         <div>
-        <button className='inline-flex items-end mr-2 focus:outline-none outline-none 'onClick={this.openMenu}>
+        <button className='inline-flex items-end mr-2 text-gray-500 hover:text-black focus:outline-none outline-none'onClick={this.openMenu}>
           {/* TODO: modify code to get avatar from database */}
-          <span className='pt-0.5 material-icons text-gray-500 hover:text-black'>{this.state.dropdown ? 'person' : 'account_circle'}</span>
+<span className='pt-0.5 material-icons'>{this.state.dropdown ? "person" : "account_circle"}</span>
         </button>
 
           {this.state.dropdown ? (
             <ul className='fixed top-15 right-0 bg-white shadow-lg py-3 my-6 mx-4 rounded-xl text-black ring-2 ring-red-500'>
-              <li className='px-4 py-2 hover:bg-red-500 hover:text-white'><a href='/profile/profile'>Settings</a></li>
+              <li className='px-4 py-2 hover:bg-red-500 hover:text-white'><a href='/profile/account'>Settings</a></li>
               <li className='px-4 py-2 hover:bg-red-500 hover:text-white'><a href='/'>Log Out</a></li>
             </ul>
           ) : (null)}

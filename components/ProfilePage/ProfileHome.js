@@ -10,7 +10,7 @@ export default class Profile extends React.Component{
     
     return(
       <>
-        <div className="pt-40 pt-32 ml-5 w-44 w-auto mr-5 hidden sm:flex">
+        <div className="pt-36 ml-5 w-44 w-auto mr-5 hidden sm:flex">
           <nav className='container flex-col flex bg-white shadow rounded-t-lg rounded-b-lg'>
             <Link href='/profile/account'>
               <a className="rounded-t-lg border-b-2 border-gray-100 bg-white font-semibold hover:bg-gray-200 hover:text-black p-3 text-left ">
