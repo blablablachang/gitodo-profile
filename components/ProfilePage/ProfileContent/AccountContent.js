@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import Link from 'next/link';
 import {getUser, modifyUser} from '../../../api/user';
+import Router from 'next/router';
 
 let qs = require('qs');
 class AccountContent extends React.Component {
@@ -92,7 +93,7 @@ class AccountContent extends React.Component {
         <div className='container shadow rounded-lg p-4 my-3 flex-col flex items-center cursor-default bg-white max-w-xl w-auto'>
           <div className="container flex-row flex items-center">
             <div className={`ml-5 h-4 w-0.5 bg-${color}-500 ring-2 ring-${color}-500`}></div>
-            <span className='ml-5 font-semibold overflow-hidden'>Email: </span>
+            <span className='ml-5 font-semibold overflow-hidden'>Email: {this.state.email} </span>
             <div className='flex-grow' />         
             </div>
             <div className=' my-2.5 container flex-col flex items-center bg-white py-2'>
@@ -201,6 +202,7 @@ class AccountContent extends React.Component {
       msg: msg
     })
   }
+
   handlePwdSubmit(e){
     e.preventDefault();
     if(this.validation())
@@ -215,10 +217,29 @@ class AccountContent extends React.Component {
       msg["curPwd"] = "!Current Password Are Wrong!";
       this.setState({msg: msg});
     }
-    else  this.setState({pwdValid: true});
-
+    else  {
+      this.setState({pwdValid: true});
+    }
     if(this.state.newPwdValid && this.state.pwdValid ){
-      console.log('Pwd ok')
+      // console.log('Pwd ok')
+      this.state.password = this.state.input["newPwd1"];
+      let data = qs.stringify({
+        'account': `${this.state.account}`,
+        'email': `${this.state.valueEmail}`,
+        'name': `${this.state.valueName}`,
+        'avatar_url': '',
+        'password': `${this.state.password}`,
+      })
+      modifyUser(this.props.userId, data).then(() => {
+        console.log('Pwd modify success')
+        // Router.push({
+        //   pathname: '/profile/account',
+        // }, `/profile/account`);
+      }).catch(err => {
+        console.error('Error while change', err);
+        window.location.reload();
+      });
+      this.state.password = this.state.input["newPwd1"];
     }
   }
   
@@ -245,8 +266,11 @@ class AccountContent extends React.Component {
         'password': `${this.state.password}`,
       })
       // console.log(data)
-      modifyUser(this.props._id, data).then(() => {
+      modifyUser(this.props.userId, data).then(() => {
         console.log('modify success')
+        // Router.push({
+        //   pathname: '/profile/account',
+        // }, `/profile/account`);
       }).catch(err => {
         console.error('Error while change', err);
         window.location.reload();
