@@ -1,7 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Link from 'next/link';
-import {getUser, modifyUser} from '../../../api/user';
+import {getUser, modifyAvatar, modifyUser} from '../../../api/user';
+import Router from 'next/router';
 import axios from 'axios';
 
 let qs = require('qs');
@@ -10,6 +11,7 @@ class AccountContent extends React.Component {
     super(props);
 
     this.state = {
+      selectedFile: null,
       account: '',
       email: '',
       name: '',
@@ -48,32 +50,34 @@ class AccountContent extends React.Component {
     this.handleDiscard = this.handleDiscard.bind(this);
   }
   
-  imageHandler = e => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      if (reader.readyState === 2) {
-        this.setState({ avatar_url: reader.result });
+  imageHandler = event => {
 
-        var FormData = require('form-data');
-        var fs = require('fs');
-        var data = new FormData();
-        data.append('file', fs.createReadStream('/C:/Users/fuchi/Downloads/AIO_Zen_Wallpaper_3840x2160_1(default).jpg'));
-        // let data = qs.stringify({
-          // 'avatar_url': `${this.state.avatar_url}`,
-        // })
+    if (event.target.files && event.target.files[0]) {
+      let img = event.target.files[0];
+      this.setState({
+        avatar_url: URL.createObjectURL(img)
+      });
+      console.log('hello', URL.createObjectURL(img));
 
-        modifyUser(this.props.userId, data).then(() => {
-          console.log(this.state.avatar_url);
-        }).catch(err => {
-          console.error('Error while change', err);
-          window.location.reload();
-        });
+      var axios = require('axios');
+      var FormData = require('form-data');
+      var fs = require('fs');
+      var data = new FormData();
+      data.append('file', fs.createReadStream(event.target.files));
   
-      }
-    };
-    reader.readAsDataURL(e.target.files[0]);
+      modifyAvatar(this.props.userId, data).then(() => {
+        console.log('upload success');
+        setTimeout(( () => this.setState({pwdShow: false}) ), 800);
+      }).catch(err => {
+        console.error('Error while change', err);
+        window.location.reload();
+      });
     
-  };
+    }
+    
+    
+    };
+  
 
   render() {
     let color = 'red';
