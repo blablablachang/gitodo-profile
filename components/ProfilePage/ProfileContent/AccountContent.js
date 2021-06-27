@@ -54,14 +54,13 @@ class AccountContent extends React.Component {
       if (reader.readyState === 2) {
         this.setState({ avatar_url: reader.result });
 
-        // var axios = require('axios');
-        // var FormData = require('form-data');
-        // var fs = require('fs');
-        // var data = new FormData();
-        // data.append('file', fs.createReadStream('/C:/Users/fuchi/Downloads/AIO_Zen_Wallpaper_3840x2160_1(default).jpg'));
-        let data = qs.stringify({
-          'avatar_url': `${this.state.avatar_url}`,
-        })
+        var FormData = require('form-data');
+        var fs = require('fs');
+        var data = new FormData();
+        data.append('file', fs.createReadStream('/C:/Users/fuchi/Downloads/AIO_Zen_Wallpaper_3840x2160_1(default).jpg'));
+        // let data = qs.stringify({
+          // 'avatar_url': `${this.state.avatar_url}`,
+        // })
 
         modifyUser(this.props.userId, data).then(() => {
           console.log(this.state.avatar_url);
