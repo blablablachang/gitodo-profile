@@ -49,7 +49,12 @@ class AccountContent extends React.Component {
     this.handleEmailSubmit = this.handleEmailSubmit.bind(this);
     this.handleDiscard = this.handleDiscard.bind(this);
   }
-  
+/*
+var FormData = require('form-data');
+e.g. with userId:60ccbb70e2b953f80f847287
+This will generate this url: 'http://140.114.91.242:3000/user/avatar/60ccbb70e2b953f80f847287',
+and make data uploaded as avatar
+*/  
   imageHandler = event => {
     this.setState({
       selectedFile: event.target.files[0],
@@ -61,9 +66,17 @@ class AccountContent extends React.Component {
     //   });
     //   console.log('hello', URL.createObjectURL(img));
     // }
-    var data = new FormData();
-    data.append('file', )
-    
+	var data = new FormData();
+	data.append('file', event.target.files[0]);
+	console.log("HEY");
+	// Here will make another data goes to API(Don't care about how it process)
+	// Two parameter
+	// Forer one, userId, which you need to make it as some variable
+	// Later one, data itself(your avatar picture)
+	modifyAvatar("60d5d764d1ce5e76846e14a8",data);
+	// You will get an userObj after it completes
+	// (i.e. this is a promise, but that's your job to deal with)
+	// Good night!    
     };
   
 
