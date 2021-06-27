@@ -1,10 +1,24 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import ProfileHome from './ProfileHome';
 import AccountContent from './ProfileContent/AccountContent';
+import {getUser} from '../../api/user';
 
-export default class Profile extends React.Component{
+class Profile extends React.Component{
   constructor(props) {
     super(props);
+
+    this.state = {
+      avatar_url: '',
+    }
+
+    getUser(this.props.userId).then(userId => {
+      this.setState({
+        avatar_url: userId.avatar_url,
+    })
+    }).catch(err => {
+        console.error('Error while getUser', err);
+    });
   }
 
   render() {
@@ -20,8 +34,8 @@ export default class Profile extends React.Component{
         </div>
         
         <div className="col-start-6 sm:pt-36 xs:col-start-3">
-        <img src="https://www.w3schools.com/html/pic_trulli.jpg" className="rounded-full h-52 w-52 flex"></img>
-        <button  className='text-center rounded-lg border-3 border-black-700 bg-white pt-2 pb-2 pl-3 pr-3 mt-5 ml-16 font-semibold hover:bg-gray-200 '>Upload</button>
+        <img src={this.state.avatar_url} className="rounded-full h-52 w-52 flex"></img>
+        <button  className='focus:outline-none outline-none text-center rounded-lg border-3 border-black-700 bg-white pt-2 pb-2 pl-3 pr-3 mt-5 ml-16 font-semibold hover:bg-gray-200 '>Upload</button>
         </div>   
       </div>
         
@@ -29,3 +43,13 @@ export default class Profile extends React.Component{
     );
   }
 }
+
+const mapStateToProps = state => ({
+  userId: state.login.userId
+});
+
+const mapDispatchToProps = {
+  
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);  // handleSubmit(event) {
