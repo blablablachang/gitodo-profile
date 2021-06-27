@@ -1,9 +1,23 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import AccountContent from './ProfileContent/AccountContent';
+import {getUser} from '../../api/user';
 
-export default class Profile extends React.Component{
+class Profile extends React.Component{
   constructor(props) {
     super(props);
+
+    this.state = {
+      avatar_url: '',
+    }
+
+    getUser(this.props.userId).then(userId => {
+      this.setState({
+        avatar_url: userId.avatar_url,
+    })
+    }).catch(err => {
+        console.error('Error while getUser', err);
+    });
   }
 
   render() {
@@ -21,5 +35,12 @@ export default class Profile extends React.Component{
   }
 }
 
+const mapStateToProps = state => ({
+  userId: state.login.userId
+});
 
+const mapDispatchToProps = {
+  
+};
 
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);  // handleSubmit(event) {

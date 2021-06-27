@@ -51,30 +51,18 @@ class AccountContent extends React.Component {
   }
   
   imageHandler = event => {
-
-    if (event.target.files && event.target.files[0]) {
-      let img = event.target.files[0];
-      this.setState({
-        avatar_url: URL.createObjectURL(img)
-      });
-      console.log('hello', URL.createObjectURL(img));
-
-      var axios = require('axios');
-      var FormData = require('form-data');
-      var fs = require('fs');
-      var data = new FormData();
-      data.append('file', fs.createReadStream(event.target.files));
-  
-      modifyAvatar(this.props.userId, data).then(() => {
-        console.log('upload success');
-        setTimeout(( () => this.setState({pwdShow: false}) ), 800);
-      }).catch(err => {
-        console.error('Error while change', err);
-        window.location.reload();
-      });
-    
-    }
-    
+    this.setState({
+      selectedFile: event.target.files[0],
+    })
+    // if (event.target.files && event.target.files[0]) {
+    //   let img = event.target.files[0];
+    //   this.setState({
+    //     avatar_url: URL.createObjectURL(img)
+    //   });
+    //   console.log('hello', URL.createObjectURL(img));
+    // }
+    var data = new FormData();
+    data.append('file', )
     
     };
   

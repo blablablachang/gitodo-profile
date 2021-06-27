@@ -40,8 +40,8 @@
     "tailwindcss": "^2.1.4"
   },
   "browser": {
-  "fs": false,
-  "path": false,
-  "os": false
-}
+    "fs": false,
+    "path": false,
+    "os": false
+  }
 }

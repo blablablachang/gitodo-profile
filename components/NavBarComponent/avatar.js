@@ -48,18 +48,18 @@ class Avatar extends React.Component{
     /* TODO: replace url and svg */
     return(
       <>
-        <div className='relative'>
+        <div>
         <button className='inline-flex items-end mr-2 text-gray-500 hover:text-black focus:outline-none outline-none'onClick={this.openMenu}>
           {/* TODO: modify code to get avatar from database */}
-          <span className='pt-2 material-icons'>{this.state.dropdown ? "person" : "account_circle"}</span>
+<span className='pt-0.5 material-icons'>{this.state.dropdown ? "person" : "account_circle"}</span>
         </button>
 
           {this.state.dropdown ? (
-            <div className='absolute top-15 right-0 bg-white shadow-lg py-3 pt-1 my-6 mx-4 rounded-lg text-black ring-2 ring-red-500 text-sm w-32'>
-              <div className='px-4 py-1 border-b-2 border-red-300'>Hello, {this.state.name}</div>
-              <a href='/profile/account'><div className='pt-2 px-4 py-1 hover:bg-red-500 hover:text-white'>Settings</div></a>
-              <a href='/login'><div className='px-4 py-1 hover:bg-red-500 hover:text-white'>Log Out</div></a>
-            </div>
+            <ul className='fixed top-15 right-0 bg-white shadow-lg py-3 my-6 mx-4 rounded-xl text-black ring-2 ring-red-500'>
+              <li className='px-4 py-2 border-b-2 border-red-300'>Hello, {this.state.name}</li>
+              <li className='px-4 py-2 hover:bg-red-500 hover:text-white'><a href='/profile/account'>Settings</a></li>
+              <li className='px-4 py-2 hover:bg-red-500 hover:text-white'><a href='/'>Log Out</a></li>
+            </ul>
           ) : (null)}
         </div>
       </>
